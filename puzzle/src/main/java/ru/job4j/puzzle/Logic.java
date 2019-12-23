@@ -68,11 +68,6 @@ public class Logic {
         return rst;
     }
 
-    public boolean isWin() {
-        int[][] table = this.convert();
-        boolean result = false;
-        return result;
-    }
 
     public int[][] convert() {
         int[][] table = new int[this.size][this.size];
@@ -87,8 +82,45 @@ public class Logic {
         return table;
     }
 
+    public boolean isWin() {
+        int[][] table = this.convert();
+        boolean result = false;
+        int i = 0;
+        int j = 0;
+        for ( ; i < table.length; i++, j++) {
+            if (Logic.monoHorizontal(table, i) || Logic.monoVertical(table, j)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static boolean monoHorizontal(int[][] board, int index) {
+        boolean result = true;
+        for (int j = 0; j < board.length; j++) {
+            if (board[index][j] != 1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static boolean monoVertical(int[][] board, int index) {
+        boolean result = true;
+        for (int[] ints : board) {
+            if (ints[index] != 1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(this.convert());
     }
+
 }
