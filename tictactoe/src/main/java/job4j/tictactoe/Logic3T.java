@@ -2,7 +2,6 @@ package job4j.tictactoe;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class Logic3T {
     private final Figure3T[][] table;
@@ -25,6 +24,14 @@ public class Logic3T {
         return result;
     }
 
+    public boolean isWinnerX() {
+        return this.isWin(Figure3T::hasMarkX);
+    }
+
+    public boolean isWinnerO() {
+        return this.isWin(Figure3T::hasMarkO);
+    }
+
     public boolean isWin(Predicate<Figure3T> predicate) {
         return this.fillBy(predicate, 0, 0, 1, 0) ||
                 this.fillBy(predicate, 0, 1, 1, 0) ||
@@ -39,7 +46,7 @@ public class Logic3T {
     public boolean hasGap() {
         return Arrays.stream(this.table)
                 .flatMap(Arrays::stream)
-                .dropWhile(x -> x.hasMarkX() || x.hasMarkO())
-                .count() != 0;
+                .anyMatch(x -> !x.hasMarkX() && !x.hasMarkO())
+                ;
     }
 }

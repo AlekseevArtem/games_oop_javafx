@@ -60,9 +60,9 @@ public class TicTacToe extends Application {
     }
 
     private void checkWinner() {
-        if (this.logic.isWin(Figure3T::hasMarkX)) {
+        if (this.logic.isWinnerX()) {
             this.showAlert("Победили Крестики! Начните новую Игру!");
-        } else if (this.logic.isWin(Figure3T::hasMarkO)) {
+        } else if (this.logic.isWinnerO()) {
             this.showAlert("Победили Нолики! Начните новую Игру!");
         }
     }
